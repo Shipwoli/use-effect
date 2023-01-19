@@ -18,6 +18,12 @@ function MyApp(){
             setLoading(false);
         })
     })
+
+    return ( 
+        <div>
+         {loading? <p>Loading...</p>  : <img src={data.message} alt="A Random Dog" />} 
+        </div>
+     );
 }
 
 
