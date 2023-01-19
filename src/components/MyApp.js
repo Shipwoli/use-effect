@@ -8,6 +8,7 @@ function MyApp(){
 
      const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 // using useEffect to fetch data
     useEffect(() =>{
         setLoading(true);
@@ -17,14 +18,24 @@ function MyApp(){
             setData(data);
             setLoading(false);
         })
-    })
-
-    return ( 
+        .catch(error => {
+            setError(error);
+            setLoading(false);
+          });
+      }, []);
+    
+      if (loading) {
+        return <div>Loading...</div>;
+      }
+      if (error) {
+        return <div>{error.message}</div>;
+      }
+      return ( 
         <div>
          {loading? <p>Loading...</p>  : <img src={data.message} alt="A Random Dog" />} 
         </div>
      );
+    }
 
-}
 
 export default MyApp;
